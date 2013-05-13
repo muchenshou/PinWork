@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 
 import com.pin.fragment.MainFragment;
 
@@ -24,13 +25,22 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		mTabHost = (TabHost)findViewById(android.R.id.tabhost);
 		mTabHost.setup();
-		mTabManager = new TabManager(this, mTabHost, android.R.id.tabcontent);
+		mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
 		Button btn = new Button(this);
-		btn.setText("hello");
+		btn.setBackgroundResource(R.drawable.tab_exchange);
 		mTabManager.addTab(mTabHost.newTabSpec("main").setIndicator(btn), MainFragment.class, null);
-		mTabManager.addTab(mTabHost.newTabSpec("main1").setIndicator("Main1"), MainFragment.class, null);
-		mTabManager.addTab(mTabHost.newTabSpec("main2").setIndicator("Main1"), MainFragment.class, null);
-		mTabManager.addTab(mTabHost.newTabSpec("main3").setIndicator("Main1"), MainFragment.class, null);
+		btn = new Button(this);
+		btn.setBackgroundResource(R.drawable.tab_ranking);
+		mTabManager.addTab(mTabHost.newTabSpec("main1").setIndicator(btn), MainFragment.class, null);
+		btn = new Button(this);
+		btn.setBackgroundResource(R.drawable.tab_role);
+		mTabManager.addTab(mTabHost.newTabSpec("main2").setIndicator(btn), MainFragment.class, null);
+		btn = new Button(this);
+		btn.setBackgroundResource(R.drawable.tab_more);
+		mTabManager.addTab(mTabHost.newTabSpec("main3").setIndicator(btn), MainFragment.class, null);
+		
+		TabWidget tabwidget = mTabHost.getTabWidget();
+		//tabwidget.set
 	}
 
 	@Override
@@ -79,6 +89,7 @@ public class MainActivity extends FragmentActivity {
 					} else {
 						ft.attach(newTab.fragment);
 					}
+					Log.i("hello","tabchange");
 				}
 				mLastTab = newTab;
 				ft.commit();
