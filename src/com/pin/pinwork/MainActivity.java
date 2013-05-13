@@ -24,7 +24,7 @@ public class MainActivity extends FragmentActivity {
 		setContentView(R.layout.activity_main);
 		mTabHost = (TabHost)findViewById(android.R.id.tabhost);
 		mTabHost.setup();
-		mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
+		mTabManager = new TabManager(this, mTabHost, android.R.id.tabcontent);
 		Button btn = new Button(this);
 		btn.setText("hello");
 		mTabManager.addTab(mTabHost.newTabSpec("main").setIndicator(btn), MainFragment.class, null);
