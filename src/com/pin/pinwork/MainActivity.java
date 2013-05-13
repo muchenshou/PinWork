@@ -7,18 +7,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 
-import com.pin.fragment.MainFragment;
+import com.pin.fragment.ExchangeFragment;
+import com.pin.fragment.RoleFragment;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnClickListener {
 	TabManager mTabManager;
 	TabHost mTabHost;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,19 +31,26 @@ public class MainActivity extends FragmentActivity {
 		mTabHost.setup();
 		mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
 		Button btn = new Button(this);
-		btn.setBackgroundResource(R.drawable.tab_exchange);
-		mTabManager.addTab(mTabHost.newTabSpec("main").setIndicator(btn), MainFragment.class, null);
-		btn = new Button(this);
-		btn.setBackgroundResource(R.drawable.tab_ranking);
-		mTabManager.addTab(mTabHost.newTabSpec("main1").setIndicator(btn), MainFragment.class, null);
-		btn = new Button(this);
+		btn.setFocusable(true);
+		btn.requestFocusFromTouch();
 		btn.setBackgroundResource(R.drawable.tab_role);
-		mTabManager.addTab(mTabHost.newTabSpec("main2").setIndicator(btn), MainFragment.class, null);
+		mTabManager.addTab(mTabHost.newTabSpec("role").setIndicator(btn), RoleFragment.class, null);
+		
+		btn = new Button(this);
+		btn.setBackgroundResource(R.drawable.tab_exchange);
+		mTabManager.addTab(mTabHost.newTabSpec("ranking").setIndicator(btn), ExchangeFragment.class, null);
+		btn = new Button(this);
+		btn.setBackgroundResource(R.drawable.tab_me);
+		mTabManager.addTab(mTabHost.newTabSpec("main1").setIndicator(btn), ExchangeFragment.class, null);
+		
 		btn = new Button(this);
 		btn.setBackgroundResource(R.drawable.tab_more);
-		mTabManager.addTab(mTabHost.newTabSpec("main3").setIndicator(btn), MainFragment.class, null);
+		mTabManager.addTab(mTabHost.newTabSpec("main3").setIndicator(btn), ExchangeFragment.class, null);
 		
 		TabWidget tabwidget = mTabHost.getTabWidget();
+		tabwidget.setEnabled(true);
+		tabwidget.setCurrentTab(0);
+		tabwidget.focusCurrentTab(0);
 		//tabwidget.set
 	}
 
@@ -49,61 +60,75 @@ public class MainActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
 	public static class TabManager implements TabHost.OnTabChangeListener {
 		private final FragmentActivity mFragmentActivity;
 		private final TabHost mTabHost;
 		private final int mContainerId;
 		private HashMap<String, TabInfo> mTabs = new HashMap<String, TabInfo>();
 		private TabInfo mLastTab;
+
 		public static class TabInfo {
 			private final String tag;
 			private final Class<?> cls;
 			private final Bundle args;
 			private Fragment fragment;
+
 			public TabInfo(String tag, Class<?> cls, Bundle args) {
 				this.tag = tag;
 				this.cls = cls;
 				this.args = args;
 			}
 		}
+
 		public TabManager(FragmentActivity activity, TabHost tabhost, int id) {
 			mFragmentActivity = activity;
 			mTabHost = tabhost;
 			mContainerId = id;
 			mTabHost.setOnTabChangedListener(this);
 		}
+
 		@Override
 		public void onTabChanged(String tabId) {
 			TabInfo newTab = mTabs.get(tabId);
-			if (newTab != mLastTab){
-				FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
-				if (mLastTab!=null) {
-					if (mLastTab.fragment!=null) {
+			
+			if (newTab != mLastTab) {
+				FragmentTransaction ft = mFragmentActivity
+						.getSupportFragmentManager().beginTransaction();
+				if (mLastTab != null) {
+					
+					if (mLastTab.fragment != null) {
 						ft.detach(mLastTab.fragment);
 					}
 				}
-				if (newTab !=null) {
+				if (newTab != null) {
 					if (newTab.fragment == null) {
-						newTab.fragment = Fragment.instantiate(mFragmentActivity, newTab.cls.getName(), newTab.args);
+						newTab.fragment = Fragment.instantiate(
+								mFragmentActivity, newTab.cls.getName(),
+								newTab.args);
 						ft.add(mContainerId, newTab.fragment, newTab.tag);
 					} else {
 						ft.attach(newTab.fragment);
 					}
-					Log.i("hello","tabchange");
 				}
 				mLastTab = newTab;
 				ft.commit();
-				mFragmentActivity.getSupportFragmentManager().executePendingTransactions();
+				mTabHost.onTouchModeChanged(false);
+				mFragmentActivity.getSupportFragmentManager()
+						.executePendingTransactions();
 			}
 		}
+
 		public void addTab(TabHost.TabSpec spec, Class<?> cls, Bundle bundle) {
 			spec.setContent(new DummyTabFactory(mFragmentActivity));
 			String tag = spec.getTag();
 			TabInfo tabinfo = new TabInfo(tag, cls, bundle);
-			
-			tabinfo.fragment = mFragmentActivity.getSupportFragmentManager().findFragmentByTag(tag);
-			if (tabinfo.fragment!=null && tabinfo.fragment.isDetached()) {
-				FragmentTransaction ft = mFragmentActivity.getSupportFragmentManager().beginTransaction();
+
+			tabinfo.fragment = mFragmentActivity.getSupportFragmentManager()
+					.findFragmentByTag(tag);
+			if (tabinfo.fragment != null && tabinfo.fragment.isDetached()) {
+				FragmentTransaction ft = mFragmentActivity
+						.getSupportFragmentManager().beginTransaction();
 				ft.detach(tabinfo.fragment);
 				ft.commit();
 			}
@@ -111,11 +136,14 @@ public class MainActivity extends FragmentActivity {
 			mTabHost.addTab(spec);
 		}
 	}
+
 	public static class DummyTabFactory implements TabHost.TabContentFactory {
 		private final Context mContext;
+
 		public DummyTabFactory(Context con) {
 			mContext = con;
 		}
+
 		@Override
 		public View createTabContent(String tag) {
 			View v = new View(mContext);
@@ -123,6 +151,14 @@ public class MainActivity extends FragmentActivity {
 			v.setMinimumWidth(0);
 			return v;
 		}
-		
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		v.setFocusable(true);
+		v.requestFocus();
+		v.setFocusableInTouchMode(true);
+		v.requestFocusFromTouch();
 	}
 }

@@ -21,27 +21,42 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int icon_exchange_on=0x7f020001;
-        public static final int icon_exchange_over=0x7f020002;
-        public static final int icon_more_on=0x7f020003;
-        public static final int icon_more_over=0x7f020004;
-        public static final int icon_ranking_on=0x7f020005;
-        public static final int icon_ranking_over=0x7f020006;
-        public static final int icon_role_on=0x7f020007;
-        public static final int icon_role_over=0x7f020008;
-        public static final int tab_exchange=0x7f020009;
-        public static final int tab_more=0x7f02000a;
-        public static final int tab_ranking=0x7f02000b;
-        public static final int tab_role=0x7f02000c;
+        public static final int head_bg=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int icon_aboutme_on=0x7f020002;
+        public static final int icon_aboutme_over=0x7f020003;
+        public static final int icon_exchange_on=0x7f020004;
+        public static final int icon_exchange_over=0x7f020005;
+        public static final int icon_more_on=0x7f020006;
+        public static final int icon_more_over=0x7f020007;
+        public static final int icon_ranking_on=0x7f020008;
+        public static final int icon_ranking_over=0x7f020009;
+        public static final int icon_role_on=0x7f02000a;
+        public static final int icon_role_over=0x7f02000b;
+        public static final int tab_exchange=0x7f02000c;
+        public static final int tab_me=0x7f02000d;
+        public static final int tab_more=0x7f02000e;
+        public static final int tab_role=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_settings=0x7f080009;
+        public static final int angle=0x7f080008;
+        public static final int app_icon=0x7f080002;
+        public static final int arrow=0x7f080003;
+        public static final int content=0x7f080007;
+        public static final int money=0x7f080004;
         public static final int realtabcontent=0x01010000;
+        public static final int task_name=0x7f080005;
+        public static final int task_summary=0x7f080006;
+        public static final int tasks_list=0x7f080001;
+        public static final int title=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int fragment_main=0x7f030001;
+        public static final int fragment_role=0x7f030002;
+        public static final int tasks_list_item=0x7f030003;
+        public static final int title=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -75,7 +90,6 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
     }
