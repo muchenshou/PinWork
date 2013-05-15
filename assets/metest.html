@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">   
+ <html>   
+ <head>   
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
+ <title>Insert title here</title>   
+ <script type="text/javascript">   
+     function show(jsondata){   
+        var jsonobjs = eval(jsondata);   
+        var table = document.getElementById("personTable");   
+        for(var y=0; y<jsonobjs.length; y++){   
+            var tr = table.insertRow(table.rows.length);
+            var td1 = tr.insertCell(0);   
+            var td2 = tr.insertCell(1);    
+            var td3 = tr.insertCell(2);     
+            td1.innerHTML = jsonobjs[y].name;    
+            td2.innerHTML = jsonobjs[y].age;    
+            td3.innerHTML = "<a href='javascript:personService.call(\""+ jsonobjs[y].phone+ "\")'>"+ jsonobjs[y].phone+ "</a>";    
+        }   
+     }   
+ </script>   
+ </head>   
+ <body onload="javascript:personService.getPersonList()">   
+    <table border="0" width="100%" id="personTable" cellspacing="0">   
+         <tr>   
+             <td width="40%" align="center">姓名</td><td width="40%">年齡</td><td align="center">電話</td>   
+         </tr>   
+     </table>   
+     <a href="javascript:window.location.reload()">刷新</a>   
+</body>   
+</html>

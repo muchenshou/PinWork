@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +15,7 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 
 import com.pin.fragment.ExchangeFragment;
+import com.pin.fragment.MeFragment;
 import com.pin.fragment.RoleFragment;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
@@ -31,8 +30,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		mTabHost.setup();
 		mTabManager = new TabManager(this, mTabHost, R.id.realtabcontent);
 		Button btn = new Button(this);
-		btn.setFocusable(true);
-		btn.requestFocusFromTouch();
 		btn.setBackgroundResource(R.drawable.tab_role);
 		mTabManager.addTab(mTabHost.newTabSpec("role").setIndicator(btn), RoleFragment.class, null);
 		
@@ -41,7 +38,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		mTabManager.addTab(mTabHost.newTabSpec("ranking").setIndicator(btn), ExchangeFragment.class, null);
 		btn = new Button(this);
 		btn.setBackgroundResource(R.drawable.tab_me);
-		mTabManager.addTab(mTabHost.newTabSpec("main1").setIndicator(btn), ExchangeFragment.class, null);
+		mTabManager.addTab(mTabHost.newTabSpec("me").setIndicator(btn), MeFragment.class, null);
 		
 		btn = new Button(this);
 		btn.setBackgroundResource(R.drawable.tab_more);
@@ -49,7 +46,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		
 		TabWidget tabwidget = mTabHost.getTabWidget();
 		tabwidget.setEnabled(true);
-		tabwidget.setCurrentTab(0);
 		tabwidget.focusCurrentTab(0);
 		//tabwidget.set
 	}
@@ -113,7 +109,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 				}
 				mLastTab = newTab;
 				ft.commit();
-				mTabHost.onTouchModeChanged(false);
 				mFragmentActivity.getSupportFragmentManager()
 						.executePendingTransactions();
 			}
