@@ -14,17 +14,16 @@
             var td3 = tr.insertCell(2);     
             td1.innerHTML = jsonobjs[y].name;    
             td2.innerHTML = jsonobjs[y].age;    
-            td3.innerHTML = "<a href='javascript:personService.call(\""+ jsonobjs[y].phone+ "\")'>"+ jsonobjs[y].phone+ "</a>";    
-        }   
+            td3.innerHTML = "<a href='javascript:meService.taskList(\""+ jsonobjs[y].phone+ "\")'>"+ jsonobjs[y].phone+ "</a>";    
+        }
      }   
  </script>   
  </head>   
  <body onload="javascript:meService.getDetails()">   
     <table border="0" width="100%" id="personTable" cellspacing="0">   
-         <tr>   
-             <td width="40%" align="center">姓名</td><td width="40%">年齡</td><td align="center">電話</td>   
-         </tr>   
-     </table>   
-     <a href="javascript:window.location.reload()">刷新</a>   
-</body>   
+         <tr>
+            <td width="40%" align="center">姓名</td><td width="40%">年齡</td><td align="center">電話</td>   
+         </tr>
+     </table>
+</body>
 </html>

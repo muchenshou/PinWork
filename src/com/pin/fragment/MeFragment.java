@@ -51,8 +51,9 @@ public class MeFragment extends Fragment {
 		// }, "demo");
 		// mWebView.loadUrl("file:///android_asset/me.html");
 		
-		mWebView.addJavascriptInterface(new PersonService(), "personService");
-		mWebView.loadUrl("file:///android_asset/metest.html");
+		//mWebView.addJavascriptInterface(new PersonService(), "personService");
+		mWebView.addJavascriptInterface(new MeService(), "meService");
+		mWebView.loadUrl("file:///android_asset/me.html");
 		mWebView.setWebChromeClient(new WebChromeClient() {
 
 			@Override
@@ -64,20 +65,8 @@ public class MeFragment extends Fragment {
 		});
 		return v;
 	}
-
-	public static class MyWebViewClient extends WebViewClient {
-
-		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
-			// TODO Auto-generated method stub
-			Log.i("hello", "url:" + url);
-			return super.shouldOverrideUrlLoading(view, url);
-		}
-
-	}
-
-	class PersonService {
-		public void getPersonList() {
+	class MeService {
+		public void getDetails() {
 			List<Person> list = getPersonDao();
 			final JSONArray array = new JSONArray();
 			for (Person p : list) {
@@ -100,23 +89,9 @@ public class MeFragment extends Fragment {
 				}
 			});
 		}
-
-		// 打电话的方法
-		public void call(String mobile) {
-			final String num = mobile;
-			mHandler.post(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"
-							+ num));
-					startActivity(intent);
-				}
-			});
-			
+		public void taskList(String list) {
+			Log.i("hello", "tasklist");
 		}
-
 		private List<Person> getPersonDao() {
 			List<Person> list = new ArrayList<Person>();
 			list.add(new Person("aa", 32, "男", "13675574545"));
@@ -127,7 +102,7 @@ public class MeFragment extends Fragment {
 			return list;
 		}
 	}
-
+	
 	class Person {
 		private String name;
 		private int age;
