@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pinwork="http://schemas.android.com/apk/res/com.pin.pinwork"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include
-        android:id="@+id/title"
-        layout="@layout/title" />
+    <com.pin.ui.TitalBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/head_bg"
+        pinwork:left_backgroud="@android:color/transparent"
+        pinwork:left_show="true"
+        pinwork:left_text="@string/app_name"
+        pinwork:mid_backgroud="@android:color/transparent"
+        pinwork:mid_show="true"
+        pinwork:mid_text="@string/app_name"
+        pinwork:right_backgroud="@android:color/transparent"
+        pinwork:right_show="true"
+        pinwork:right_text="@string/app_name" >
+    </com.pin.ui.TitalBar>
 
     <TextView
         android:layout_width="fill_parent"
