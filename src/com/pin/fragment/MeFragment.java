@@ -18,6 +18,10 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import com.pin.pinwork.R;
 
+/**
+ * @author song
+ * Œ“
+ */
 public class MeFragment extends Fragment {
 	WebView mWebView;
 	String data = "<table border=\"1\"> " + "<tr>" + "<th>Month</th>"

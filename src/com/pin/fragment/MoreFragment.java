@@ -1,5 +1,11 @@
 package com.pin.fragment;
 
-public class MoreFragment {
+import android.support.v4.app.Fragment;
 
+/**
+ * @author song
+ * ¸ü¶à
+ */
+public class MoreFragment extends Fragment{
+	
 }

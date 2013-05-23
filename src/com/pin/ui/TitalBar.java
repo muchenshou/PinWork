@@ -3,6 +3,7 @@ package com.pin.ui;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -81,6 +82,8 @@ public class TitalBar extends RelativeLayout {
 		btn.setBackgroundDrawable(mMidDrawable);
 		btn.setLayoutParams(params);
 		btn.setVisibility(mMidShow ? View.VISIBLE : View.INVISIBLE);
+		btn.setTextColor(Color.WHITE);
+		btn.setTextSize(25);
 		addView(btn);
 	}
 
